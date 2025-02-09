@@ -1,6 +1,6 @@
 package elevator.system.config;
 
-import elevator.system.handlers.WebSocketHandler;
+import elevator.system.handler.WebSocketHandler;
 import elevator.system.service.intf.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

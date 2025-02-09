@@ -1,4 +1,4 @@
-package elevator.system.handlers;
+package elevator.system.handler;
 
 import elevator.system.service.intf.WebSocketService;
 import lombok.extern.slf4j.Slf4j;

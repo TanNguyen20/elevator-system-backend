@@ -1,4 +1,4 @@
-package elevator.system.handlers;
+package elevator.system.handler;
 
 import elevator.system.exception.ElevatorSystemException;
 import elevator.system.model.ErrorResponse;
