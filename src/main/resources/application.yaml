@@ -1,0 +1,25 @@
+server:
+  shutdown: graceful
+  servlet:
+    session:
+      timeout: 60m
+
+spring:
+  main:
+    allow-circular-references: true
+  application:
+    name: elevator-system
+  datasource:
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+    url: ${POSTGRESQL_CONNECTION:}
+    username: ${POSTGRESQL_USER:}
+    password: ${POSTGRESQL_PASSWORD:}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
