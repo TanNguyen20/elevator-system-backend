@@ -154,7 +154,9 @@ public class ElevatorServiceImpl implements ElevatorService {
         }
 
         if (elevator.getCurrentFloor() == destinationFloor && !elevator.getState().equals(ElevatorState.IDLE)) {
-            elevator.getPendingFloors().remove(0);
+            if (!elevator.getPendingFloors().isEmpty()) {
+                elevator.getPendingFloors().remove(0);
+            }
             elevator.setDoorState(DoorState.OPEN);
             elevator.setState(ElevatorState.STOPPED);
         }
