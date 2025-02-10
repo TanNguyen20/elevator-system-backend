@@ -118,12 +118,13 @@ public class ElevatorServiceImpl implements ElevatorService {
 
         for (Elevator elevator : movingElevators) {
             moveElevator(elevator.getId());
-            scheduler.schedule(
+        }
+        
+        scheduler.schedule(
                 this::updateStoppedElevators,
                 ScheduleTask.STOPPED_AFTER_MOVING_TIME,
                 TimeUnit.MILLISECONDS
-            );
-        }
+        );
     }
 
     @Transactional
