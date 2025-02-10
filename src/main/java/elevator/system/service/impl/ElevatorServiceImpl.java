@@ -131,7 +131,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             .toList();
 
         for (Elevator elevator : stoppedElevators) {
-            if (elevator.getState().equals(ElevatorState.STOPPED) && elevator.getPendingFloors().isEmpty()) {
+            if (elevator.getPendingFloors().isEmpty()) {
                 elevator.setDoorState(DoorState.CLOSED);
                 elevator.setState(ElevatorState.IDLE);
                 elevator.setDirection(Direction.NONE);
