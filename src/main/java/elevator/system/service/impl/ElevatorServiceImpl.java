@@ -135,6 +135,9 @@ public class ElevatorServiceImpl implements ElevatorService {
                 elevator.setDoorState(DoorState.CLOSED);
                 elevator.setState(ElevatorState.IDLE);
                 elevator.setDirection(Direction.NONE);
+            } else {
+                elevator.setDoorState(DoorState.CLOSED);
+                elevator.setState(ElevatorState.MOVING);
             }
             elevatorRepository.save(elevator);
             webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
