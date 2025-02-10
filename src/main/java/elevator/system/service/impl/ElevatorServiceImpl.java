@@ -65,6 +65,7 @@ public class ElevatorServiceImpl implements ElevatorService {
         bestElevator.ifPresent(elevator -> {
             elevator.getPendingFloors().add(userCurrentFloor);
             elevator.setState(ElevatorState.MOVING);
+            elevatorRepository.save(elevator);
             webSocketService.sendMessageToAllClients(elevator);
             log.info("Elevator {} assigned to floor {} request.", elevator.getId(), userCurrentFloor);
         });
@@ -81,6 +82,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             }
             elevator.setDoorState(DoorState.CLOSED);
             elevator.setState(ElevatorState.MOVING);
+            elevatorRepository.save(elevator);
             webSocketService.sendMessageToAllClients(elevator);
             log.info("Elevator {} is moving to floor {}", elevator.getId(), destinationFloor);
         });
@@ -95,6 +97,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             if (elevator.getPendingFloors().isEmpty()) {
                 elevator.setState(ElevatorState.IDLE);
                 elevator.setDirection(Direction.NONE);
+                elevatorRepository.save(elevator);
                 webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
             } else {
                 int nextFloor = elevator.getPendingFloors().get(0);
@@ -160,6 +163,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             elevator.setDoorState(DoorState.OPEN);
             elevator.setState(ElevatorState.STOPPED);
         }
+        elevatorRepository.save(elevator);
         webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
         log.info("Elevator {} moved to floor {}", elevator.getId(), elevator.getCurrentFloor());
     }
