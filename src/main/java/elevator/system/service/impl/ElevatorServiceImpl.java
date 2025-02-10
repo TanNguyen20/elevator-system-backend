@@ -98,7 +98,7 @@ public class ElevatorServiceImpl implements ElevatorService {
                 elevator.setState(ElevatorState.IDLE);
                 elevator.setDirection(Direction.NONE);
                 elevatorRepository.save(elevator);
-                webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
+                webSocketService.sendMessageToAllClients(elevator);
             } else {
                 int nextFloor = elevator.getPendingFloors().get(0);
                 moveOneStep(elevator, nextFloor);
@@ -143,7 +143,7 @@ public class ElevatorServiceImpl implements ElevatorService {
                 elevator.setState(ElevatorState.MOVING);
             }
             elevatorRepository.save(elevator);
-            webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
+            webSocketService.sendMessageToAllClients(elevator);
         }
     }
 
@@ -164,7 +164,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             elevator.setState(ElevatorState.STOPPED);
         }
         elevatorRepository.save(elevator);
-        webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
+        webSocketService.sendMessageToAllClients(elevator);
         log.info("Elevator {} moved to floor {}", elevator.getId(), elevator.getCurrentFloor());
     }
 
@@ -181,7 +181,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             if (elevator.getState().equals(ElevatorState.STOPPED) ||
                 elevator.getState().equals(ElevatorState.IDLE)) {
                 elevator.setDoorState(DoorState.OPEN);
-                webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
+                webSocketService.sendMessageToAllClients(elevator);
             }
         });
     }
@@ -193,7 +193,7 @@ public class ElevatorServiceImpl implements ElevatorService {
             if (elevator.getState().equals(ElevatorState.STOPPED) ||
                 elevator.getState().equals(ElevatorState.IDLE)) {
                 elevator.setDoorState(DoorState.CLOSED);
-                webSocketService.sendMessageToAllClients(ElevatorResponseDTO.fromEntity(elevator));
+                webSocketService.sendMessageToAllClients(elevator);
             }
         });
     }
